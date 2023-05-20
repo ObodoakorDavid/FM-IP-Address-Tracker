@@ -18,6 +18,7 @@
   background-image: url("./images/pattern-bg-mobile.png");
   background-repeat: no-repeat;
   background-size: cover;
+  padding-bottom: 150px;
 }
 
 @media (width > 375px) {
@@ -34,5 +35,13 @@ input:focus {
 .details {
   right: 0;
   left: 0;
-  top: -120px;
+  top: 160px;
+  z-index: 3;
+}
+
+/* ========================= */
+
+.leaflet-container {
+  height: 70vh;
+  z-index: 2;
 }
