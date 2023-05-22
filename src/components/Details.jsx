@@ -2,24 +2,28 @@
 
 import React from "react";
 
-const Details = () => {
+const Details = ({ ipData }) => {
   return (
-    <div className="details bg-white position-absolute w-90 mx-auto rounded-4 p-3 d-flex flex-column gap-3 ">
-      <div>
+    <div className="details bg-white position-absolute w-90 mx-auto rounded-4 py-4 px-3 d-flex flex-column flex-lg-row align-items-center p-lg-4 gap-3 ">
+      <div className="p-lg-2">
         <small className="fw-bold text-secondary">IP ADDRESS</small>
-        <p className="fw-bold m-0">192.212.174.101</p>
+        <p className=" fs-3 m-0">{ipData && ipData.ip}</p>
       </div>
-      <div>
+      <div className="p-lg-2">
         <small className="fw-bold text-secondary">LOCATION</small>
-        <p className="fw-bold m-0">Brooklyn, NY 10001</p>
+        <p className=" fs-2 m-0">
+          {ipData && `${ipData.location.city}, ${ipData.location.region}`}
+        </p>
       </div>
-      <div>
+      <div className="p-lg-2">
         <small className="fw-bold text-secondary">TIMEZONE</small>
-        <p className="fw-bold m-0">UTC-05:00</p>
+        <p className=" fs-2 m-0">
+          {ipData && `UTC ${ipData.location.timezone}`}
+        </p>
       </div>
-      <div>
+      <div className="p-lg-2">
         <small className="fw-bold text-secondary">ISP</small>
-        <p className="fw-bold m-0">SpaceX StarLink</p>
+        <p className="fs-2 m-0">{ipData && ipData.isp}</p>
       </div>
     </div>
   );
