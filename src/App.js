@@ -6,13 +6,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "leaflet/dist/leaflet.css";
 import Map from "./components/Map";
 import { useEffect, useState } from "react";
+import { isIP } from "is-ip";
 
 function App() {
   const [ipAddress, setIpAddress] = useState(null);
   const [lat, setLat] = useState("51.505");
   const [long, setLong] = useState("-0.09");
   const [ipData, setIpData] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log(ipAddress);
@@ -26,45 +26,63 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setLoading(true);
     const getInfo = async (url) => {
       const res = await fetch(url);
+      console.log(res.status);
+
       const data = await res.json();
       setIpData(data);
       setLat(data.location.lat);
       setLong(data.location.lng);
       console.log(data);
-      setLoading(false);
+
     };
 
-    // ipAddress && getInfo(`https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_MY_KEY}&ipAddress=${ipAddress}`);
-    const jj = {
-      ip: "210.76.207.126",
-      location: {
-        country: "CN",
-        region: "Beijing Shi",
-        city: "Wangfujing",
-        lat: 39.90807,
-        lng: 116.4115,
-        postalCode: "",
-        timezone: "+08:00",
-        geonameId: 10175057,
-      },
-      as: {
-        asn: 7497,
-        name: "CSTNET-AS-AP",
-        route: "210.76.206.0/23",
-        domain: "",
-        type: "",
-      },
-      isp: "Computer Network Information Center",
-    };
-    console.log(jj.location.lat);
-    setIpData(jj);
-    setLat(jj.location.lat);
-    setLong(jj.location.lng);
-    console.log(ipAddress);
-    setLoading(false);
+    // if (ipAddress) {
+    //   isIP(ipAddress)
+    //     ? getInfo(
+    //         `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_MY_KEY}&ipAddress=${ipAddress}`
+    //       )
+    //     : getInfo(
+    //         `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_MY_KEY}&domain=${ipAddress}`
+    //       );
+    // }
+
+    // isIP(ipAddress)
+    //   ? getInfo(
+    //       `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_MY_KEY}&ipAddress=${ipAddress}`
+    //     )
+    //   : `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_MY_KEY}&domain=${ipAddress}`;
+    // domain && getInfo(`https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_MY_KEY}&domain=${domain}`);
+
+    // ==============================
+
+    // const jj = {
+    //   ip: "210.76.207.126",
+    //   location: {
+    //     country: "CN",
+    //     region: "Beijing Shi",
+    //     city: "Wangfujing",
+    //     lat: 39.90807,
+    //     lng: 116.4115,
+    //     postalCode: "",
+    //     timezone: "+08:00",
+    //     geonameId: 10175057,
+    //   },
+    //   as: {
+    //     asn: 7497,
+    //     name: "CSTNET-AS-AP",
+    //     route: "210.76.206.0/23",
+    //     domain: "",
+    //     type: "",
+    //   },
+    //   isp: "Computer Network Information Center",
+    // };
+    // console.log(jj.location.lat);
+    // setIpData(jj);
+    // setLat(jj.location.lat);
+    // setLong(jj.location.lng);
+    // console.log(ipAddress);
   }, [ipAddress]);
 
   // const handleSubmit = async () => {
