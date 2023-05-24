@@ -10,7 +10,7 @@ const MarkerPosition = ({ center, zoom }) => {
 
   const customIcon = new Icon({
     iconUrl: markerIcon,
-    iconSize: [30, 38],
+    iconSize: [24, 32],
   });
 
   //   console.log(center.center);
