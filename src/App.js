@@ -22,7 +22,6 @@ function App() {
       const res = await fetch(url);
       const data = await res.json();
       setIpAddress(data.ip);
-      console.log(data);
     };
     getIP("https://api.ipify.org?format=json");
   }, []);
@@ -30,19 +29,26 @@ function App() {
   useEffect(() => {
     const getInfo = async (url) => {
       const res = await fetch(url);
-      console.log(res.status);
       if (res.status === 422 || res.status === 400) {
         setError("Ooops! Something went wrong");
-        console.log("omo");
         return;
       }
       const data = await res.json();
       setIpData(data);
       setLat(data.location.lat);
       setLong(data.location.lng);
-      console.log(data);
       setError(null);
     };
+
+    if (ipAddress) {
+      isIP(ipAddress)
+        ? getInfo(
+            `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_MY_KEY}&ipAddress=${ipAddress}`
+          )
+        : getInfo(
+            `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_MY_KEY}&domain=${ipAddress}`
+          );
+    }
   }, [ipAddress]);
 
   return (
