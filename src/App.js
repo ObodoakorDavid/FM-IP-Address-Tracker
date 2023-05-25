@@ -17,7 +17,6 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log(ipAddress);
     const getIP = async (url) => {
       const res = await fetch(url);
       const data = await res.json();

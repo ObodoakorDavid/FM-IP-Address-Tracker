@@ -20,7 +20,7 @@ const MarkerPosition = ({ center, zoom }) => {
     map.flyTo(center, zoom, {
       animate: true,
     });
-  }, [map, center]);
+  }, [map, center, zoom]);
   return (
     <Marker position={center} icon={customIcon}>
       <Popup>Your IP Location</Popup>
